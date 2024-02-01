@@ -6,8 +6,10 @@ body {
   font-family: sans-serif;
   width: 100vw;
   height: 95vh;
+  display: flex;
   background-color: #fafafa;
   margin: 0;
+  background-blend-mode: luminosity;
 }
 
 .back {
@@ -17,15 +19,22 @@ body {
   position: absolute;
   top: 16px;
   left: 10px;
+  border-radius: 20px;
+  background-color: #fafafa;
+  padding: 1rem;
+  box-shadow: 0px 3px 6px #d1d1d1;
 }
 
 #app {
-  width: 100%;
-  height: 100%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  box-shadow: 0px 3px 6px #d1d1d1;
+  padding: 1rem;
+  border-radius: 20px;
 }
 
 h1 {
@@ -37,6 +46,16 @@ h1 {
 #weather {
   min-width: 200px;
   min-height: 200px;
-  background-color: white;
-  box-shadow: 0px 3px 6px #d1d1d1;
+  margin-top: 1rem;
+}
+
+.image-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#icon {
+  width: 100px;
+  margin: auto;
 }

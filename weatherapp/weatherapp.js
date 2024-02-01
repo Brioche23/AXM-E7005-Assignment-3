@@ -41,9 +41,14 @@ const URL =
   "https://api.openweathermap.org/data/2.5/weather?lat=60.192059&lon=24.945831&units=metric&appid=aecd880c55402474294f8ffa79790fd6";
 let lat = 0;
 let lon = 0;
+
+let body = document.querySelector("body");
+let icon = document.querySelector("#icon");
+let weatherDiv = document.getElementById("weather_desc");
+
 getLocation();
 
-setInterval(fetchWeatherData, 60000);
+setInterval(fetchWeatherData(lat, lon), 60000);
 
 function fetchWeatherData(lat, lon) {
   console.log("Fetch data");
@@ -70,17 +75,25 @@ function fetchWeatherData(lat, lon) {
  */
 
 function renderWeatherData(weatherData) {
-  let weatherDiv = document.querySelector("#weather");
   console.log(weatherData.name);
-  console.log(weatherData.weather[0].description);
+  console.log(weatherData.weather[0].icon);
+
+  let temp = weatherData.main.temp;
+
+  let color = temp > 5 ? "red" : "blue";
 
   let message = `Hello! Today in ${weatherData.name} the weather is ${weatherData.weather[0].main}, most specifcally ${weatherData.weather[0].description}.
   <p>The temperature is ${weatherData.main.temp}° but if feels like ${weatherData.main.feels_like}°</p>`;
+  weatherDiv.style.color = color;
 
   weatherDiv.innerHTML = message;
+  let iconCode = weatherData.weather[0].icon;
+  icon.src = `http://openweathermap.org/img/w/${iconCode}.png`;
+  body.style.backgroundImage = `url(http://openweathermap.org/img/w/${iconCode}.png)`;
+
+  h2.innerHTML = "Latitude: " + lat + "<br>Longitude: " + lon;
 }
 
-// ! Da Fare
 /* (2p)
  * Now you may touch the HTML-site again. Do a functionality where the user
  * can select another city. For example dropdown -selector which contains
@@ -95,11 +108,9 @@ let selector = document.querySelector("#cities");
 selector.addEventListener("change", selectLocation);
 function selectLocation(e) {
   console.log("Change location", JSON.parse(e.target.value));
-  const selectedLoc = {
-    lat: JSON.parse(e.target.value).lat,
-    lon: JSON.parse(e.target.value).lon,
-  };
-  fetchWeatherData(selectedLoc.lat, selectedLoc.lon);
+  (lat = JSON.parse(e.target.value).lat),
+    (lon = JSON.parse(e.target.value).lon),
+    fetchWeatherData(lat, lon);
 }
 
 /*
@@ -129,17 +140,13 @@ function showPosition(position) {
   lon = position.coords.longitude;
 
   fetchWeatherData(lat, lon);
-  h2.innerHTML =
-    "Latitude: " +
-    position.coords.latitude +
-    "<br>Longitude: " +
-    position.coords.longitude;
 }
 
 function showError(error) {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      h2.innerHTML = "User denied the request for Geolocation.";
+      h2.innerHTML =
+        "User denied the request for Geolocation. </br> Select the city manually.";
 
       break;
     case error.POSITION_UNAVAILABLE:
