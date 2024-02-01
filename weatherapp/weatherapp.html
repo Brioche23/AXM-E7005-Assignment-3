@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- 
+  All relevant parts of this assignment
+  can be found from weatherapp.js
+  
+  There's no need to alter the HTML-code
+  but you may if you want to. 🙂
+-->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather</title>
+  <link rel="stylesheet" href="weatherapp.css" />
+</head>
+
+<body>
+  <a class="back" href="../index.html">&lsaquo; Back to menu</a>
+  <div id="app">
+    <h1>Weather today</h1>
+    <h2>
+      Location
+    </h2>
+    <label for="cities">Choose a city:</label>
+    <select name="cities" id="cities">
+      <option selected value='{"lat":"45.464664","lon":"9.188540"}'>Milan</option>
+      <option value='{"lat":"46.13509","lon":"9.55164"}'>Cosio Valtellino</option>
+      <option value='{"lat":"60.192059","lon":"24.945831"}'>Helsinki</option>
+      <option value='{"lat":"40.853294","lon":"14.305573"}'>Naples</option>
+    </select>
+    <div id="weather"></div>
+  </div>
+  <script type="text/javascript" src="weatherapp.js"></script>
+</body>
+
+</html>
